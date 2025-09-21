@@ -7,10 +7,11 @@ import { BiTask } from "react-icons/bi";
 import styled from "styled-components"
 const MainWrapper = styled.div`
     width:800px;
-    height:900px;
+    height:auto;
     border-radius:15px;
     background:linear-gradient(#1cf332 , #f34b1c , #8b1cf3 , #e5f31c);
     margin:auto;
+    padding-bottom:50px;
 `
 const WrapperInput = styled.input`
     width:270px;
@@ -72,6 +73,8 @@ export const TaskForm = () => {
         setText("")
         setIsDone(false)
     }
+    const filteredTaskTrue = tasks.filter(task => task.isDone === true)
+    const filteredTaskFalse = tasks.filter(task => task.isDone === false)
     return (
         <MainWrapper>
              <Title>Your Task List</Title>
@@ -83,7 +86,10 @@ export const TaskForm = () => {
             </label>
             <ButtonAdd><BiTask /> Add Task</ButtonAdd>
         </WrapperForm>
-        <TaskList tasks={tasks}/>
+        <Title>Pending</Title>
+        <TaskList tasks={filteredTaskFalse}/>
+         <Title>Done</Title>
+        <TaskList tasks={filteredTaskTrue}/>
         </MainWrapper>
     )
 }
